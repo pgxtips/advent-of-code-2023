@@ -1,2 +1,2 @@
-# advent-of-code-2023
-to practice rust
+# Advent of Code - Rust
+
