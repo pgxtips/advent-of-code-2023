@@ -61,7 +61,7 @@ fn process_file(content: &Vec<String>) -> i32 {
 }
 
 fn main() {
-    let input = get_file_content("src/input.txt");
+    let input = get_file_content("src/example2.txt");
     let result = process_file(&input);
     println!("Total: {}", result);
 }
