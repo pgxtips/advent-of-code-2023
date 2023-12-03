@@ -52,7 +52,6 @@ fn get_file_content(file_path: &str) -> (Vec<Block>, Vec<Block>) {
                     result_numbers.push(block_numbers);
                     block_numbers = Block::new(String::new(), Vec::new());
                 }
-                continue;
             } 
             else {
                 if block_numbers.value.len() > 0 {result_numbers.push(block_numbers);}
@@ -60,6 +59,11 @@ fn get_file_content(file_path: &str) -> (Vec<Block>, Vec<Block>) {
             }
 
             if is_special(char) {
+                if block_numbers.value.len() > 0 {
+                    result_numbers.push(block_numbers);
+                    block_numbers = Block::new(String::new(), Vec::new());
+                }
+
                 block_specials.value.push(char);
                 block_specials.positions.push(Coordinates::new(index_char as i32, index_line as i32));
             } 
@@ -114,6 +118,7 @@ fn process_data(numbers: &Vec<Block>, specials: &Vec<Block>){
             if gear_ratio_nums.len() == 2 {
                 let gear_ratio = gear_ratio_nums[0] * gear_ratio_nums[1];
                 result_sum_gear_ratio += gear_ratio;
+                println!("{} * {} = {}", gear_ratio_nums[0], gear_ratio_nums[1], gear_ratio);
             } 
         }
     }
@@ -124,6 +129,6 @@ fn process_data(numbers: &Vec<Block>, specials: &Vec<Block>){
 }
 
 fn main() {
-    let (numbers, specials) = get_file_content("src/input.txt");
+    let (numbers, specials) = get_file_content("src/Data.txt");
     process_data(&numbers, &specials);
 }
