@@ -1,0 +1,23 @@
+use std::fs;
+
+fn get_file_content(file_path: &str) -> Vec<String>{
+    fs::read_to_string(file_path)
+        .expect("Something went wrong reading the file")
+        .lines()
+        .map(|line| line.to_string())
+        .collect::<Vec<String>>()
+}
+
+fn process_data(content: &Vec<String>) {
+    for (index, line) in content.iter().enumerate() {
+        let split_1 = line.split(":").map(|x| x.trim().parse::<i32>().unwrap()).collect::<Vec<i32>>();
+        let game_id = split_1.join(""); 
+
+        println!("{}", line);
+    }
+}
+
+fn main() {
+    let content = get_file_content("src/input.txt");
+    process_data(&content);
+}
